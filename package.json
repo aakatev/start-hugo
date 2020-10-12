@@ -1,0 +1,23 @@
+{
+  "name": "start-hugo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "netlify-lambda install"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aakatev/start-hugo.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aakatev/start-hugo/issues"
+  },
+  "homepage": "https://github.com/aakatev/start-hugo#readme",
+  "dependencies": {
+    "netlify-lambda": "^2.0.1"
+  }
+}
