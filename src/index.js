@@ -1,18 +1,13 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import App from './components/app'
+import CssBaseline from '@material-ui/core/CssBaseline';
 
-class HelloMessage extends React.Component {
-  render() {
-    return (
-      <div>
-        <div className="container">
-          <h1>Hello</h1>
-        </div>
-      </div>
-    )
-  }
-}
+const Root = () => (
+  <React.Fragment>
+    <CssBaseline />
+    <App/>
+  </React.Fragment>
+)
 
-let App = document.getElementById('app')
-
-ReactDOM.render(<HelloMessage />, App)
+ReactDOM.render(<Root />, document.getElementById('app'))
