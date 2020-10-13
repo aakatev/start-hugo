@@ -44,8 +44,23 @@ const Content = () => {
   };
 
   const generateCode = () => {
-    var url="https://nifty-kilby-32cac7.netlify.app/api/index";
-    window.open(url, '_blank');
+    var url= `${window.location}api/index`;
+    fetch(url, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        //Body
+      })
+    }).then(response => response.blob())
+    .then((blob)=>{
+      var zipUrl = window.URL.createObjectURL(blob);
+      window.open(zipUrl, '_blank')
+    }).catch((error)=>{
+    console.log(error)
+    })    
   }
 
   return(
