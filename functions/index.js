@@ -38,11 +38,7 @@ const baseOfFile = `<!doctype html>
   </body>
 </html>`
 
-const singleFile = `{{ define "main" }}
-  <div class="layout">
-    <div class="content">{{ .Content }}</div>
-  </div>
-{{ end }}`
+const singleFile = require('./templates/single.js')
 
 const listFile = `{{ define "main" }}
   <div class="layout">
