@@ -44,7 +44,8 @@ const Content = () => {
   };
 
   const generateCode = () => {
-    fetch('https://nifty-kilby-32cac7.netlify.app/api/index')
+    var url="https://nifty-kilby-32cac7.netlify.app/api/index";
+    window.open(url, '_blank');
   }
 
   return(
