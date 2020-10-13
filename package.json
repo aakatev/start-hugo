@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "netlify-lambda install"
+    "build": "rimraf dist && netlify-lambda install && parcel build index.html",
+    "dev": "rimraf dist && parcel index.html"
   },
   "repository": {
     "type": "git",
@@ -18,6 +19,12 @@
   },
   "homepage": "https://github.com/aakatev/start-hugo#readme",
   "dependencies": {
-    "netlify-lambda": "^2.0.1"
+    "netlify-lambda": "^2.0.1",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "rimraf": "^3.0.2"
+  },
+  "devDependencies": {
+    "parcel-bundler": "^1.12.4"
   }
 }
