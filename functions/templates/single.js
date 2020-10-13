@@ -4,4 +4,4 @@ const singleFile = `{{ define "main" }}
   </div>
 {{ end }}`
 
-module.exports = singleFile;
+module.exports = singleFile
