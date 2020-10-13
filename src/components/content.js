@@ -4,7 +4,7 @@ import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import clsx from 'clsx';
-import OutlinedInput from '@material-ui/core/OutlinedInput';
+import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import Button from '@material-ui/core/Button';
@@ -71,7 +71,7 @@ const Content = () => {
         <Paper className={fixedHeightPaper}>
           <FormControl fullWidth className={classes.margin} variant="outlined">
             <InputLabel htmlFor="outlined-adornment-name">Website Name</InputLabel>
-            <OutlinedInput
+            <Input
               id="outlined-adornment-name"
               value={values.name}
               onChange={handleChange('name')}
@@ -80,7 +80,7 @@ const Content = () => {
           </FormControl>
           <FormControl fullWidth className={classes.margin} variant="outlined">
             <InputLabel htmlFor="outlined-adornment-amount">Base URL</InputLabel>
-            <OutlinedInput
+            <Input
               id="outlined-adornment-url"
               value={values.url}
               onChange={handleChange('url')}
@@ -99,7 +99,7 @@ const Content = () => {
         <Paper className={classes.paper}>
           <FormControl fullWidth className={classes.margin} variant="outlined">
             <InputLabel htmlFor="outlined-adornment-scripts">Scripts</InputLabel>
-            <OutlinedInput
+            <Input
               id="outlined-adornment-scripts"
               value={values.scripts}
               onChange={handleChange('scripts')}
@@ -112,7 +112,7 @@ const Content = () => {
         <Paper className={classes.paper}>
           <FormControl fullWidth className={classes.margin} variant="outlined">
             <InputLabel htmlFor="outlined-adornment-name">Stylesheets</InputLabel>
-            <OutlinedInput
+            <Input
               id="outlined-adornment-styles"
               value={values.styles}
               onChange={handleChange('styles')}

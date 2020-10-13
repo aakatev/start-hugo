@@ -4,6 +4,7 @@
 
 [dev]
   port = 3000
+  autoLaunch = false
   publish = "/dist"
   command = "npm run dev"
 
