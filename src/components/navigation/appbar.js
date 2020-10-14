@@ -9,7 +9,7 @@ import IconButton from '@material-ui/core/IconButton'
 import NotificationsIcon from '@material-ui/icons/Notifications'
 import GitHubIcon from '@material-ui/icons/GitHub'
 import Link from '@material-ui/core/Link'
-
+import Badge from '@material-ui/core/Badge';
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -34,10 +34,7 @@ const NavigationAppBar = ({ handleDrawerOpen, open }) => {
   const classes = useStyles()
 
   return (
-    <AppBar
-      position="absolute"
-      className={clsx(classes.appBar)}
-    >
+    <AppBar position="absolute" className={clsx(classes.appBar)}>
       <Toolbar className={classes.toolbar}>
         <Typography
           component="h1"
@@ -55,7 +52,9 @@ const NavigationAppBar = ({ handleDrawerOpen, open }) => {
           onClick={handleDrawerOpen}
           className={clsx(classes.menuButton)}
         >
-          <NotificationsIcon fontSize="large" />
+          <Badge badgeContent={1} color="secondary">
+            <NotificationsIcon fontSize="large" />
+          </Badge>
         </IconButton>
         <IconButton
           component={Link}
