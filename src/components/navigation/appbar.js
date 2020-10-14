@@ -6,7 +6,7 @@ import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
 import IconButton from '@material-ui/core/IconButton'
-import HelpIcon from '@material-ui/icons/Help'
+import NotificationsIcon from '@material-ui/icons/Notifications'
 import GitHubIcon from '@material-ui/icons/GitHub'
 import Link from '@material-ui/core/Link'
 
@@ -55,7 +55,7 @@ const NavigationAppBar = ({ handleDrawerOpen, open }) => {
           onClick={handleDrawerOpen}
           className={clsx(classes.menuButton)}
         >
-          <HelpIcon fontSize="large" />
+          <NotificationsIcon fontSize="large" />
         </IconButton>
         <IconButton
           component={Link}

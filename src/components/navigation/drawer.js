@@ -2,13 +2,11 @@ import React from 'react'
 
 import clsx from 'clsx'
 import Drawer from '@material-ui/core/Drawer'
-import List from '@material-ui/core/List'
 import Divider from '@material-ui/core/Divider'
 import IconButton from '@material-ui/core/IconButton'
 import CloseIcon from '@material-ui/icons/Close'
 import { makeStyles } from '@material-ui/core/styles'
-
-import { mainListItems, secondaryListItems } from './links'
+import Typography from '@material-ui/core/Typography';
 
 const drawerWidth = '100vw'
 
@@ -22,12 +20,17 @@ const useStyles = makeStyles((theme) => ({
   },
   drawerPaper: {
     position: 'relative',
-    whiteSpace: 'nowrap',
     width: drawerWidth,
     transition: theme.transitions.create('width', {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
     }),
+  },
+  main: {
+    marginTop: theme.spacing(6),
+    marginBottom: theme.spacing(2),
+    marginLeft: theme.spacing(4),
+    marginRight: theme.spacing(4)
   },
   drawerPaperClose: {
     overflowX: 'hidden',
@@ -40,6 +43,9 @@ const useStyles = makeStyles((theme) => ({
       width: theme.spacing(9),
     },
   },
+  marginTop: {
+    marginTop: theme.spacing(3)
+  }
 }))
 
 const NavigationDrawer = ({ handleDrawerClose, open }) => {
@@ -58,9 +64,23 @@ const NavigationDrawer = ({ handleDrawerClose, open }) => {
         </IconButton>
       </div>
       <Divider />
-      <List>{mainListItems}</List>
-      <Divider />
-      <List>{secondaryListItems}</List>
+      <div className={classes.main}>
+        <Typography variant="h2" component="h1" gutterBottom>
+          Usage instructions
+        </Typography>
+        <Typography variant="h5" component="h2" gutterBottom>
+          1. Install Hugo on your machine
+        </Typography>
+        <Typography variant="body1">Tip: <a href="https://gohugo.io/getting-started/installing/">Hugo official docs</a> is the best way to start</Typography>
+        <Typography className={classes.marginTop} variant="h5" component="h2" gutterBottom>
+          2. Generate a new project using Hugo Generator
+        </Typography>
+        <Typography variant="body1">Tip: If you are not familiar with Hugo yet, leave default settings as they are</Typography>
+        <Typography className={classes.marginTop} variant="h5" component="h2" gutterBottom>
+          3. Unzip generated project, and start developing
+        </Typography>
+        <Typography variant="body1">Tip: To start Hugo development server run <code>hugo server</code></Typography>
+      </div>
     </Drawer>
   )
 }
