@@ -40,8 +40,10 @@ const Content = () => {
   const [values, setValues] = React.useState({
     name: 'Hugo Starter Project',
     url: 'example.com',
+    publishDirectory: 'docs',
     scripts: 'https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js',
-    styles: 'https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/css/bootstrap.min.css'
+    styles: 'https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/css/bootstrap.min.css',
+    googleAnalytics: ''
   });
 
   const handleChange = (prop) => (event) => {
@@ -75,7 +77,7 @@ const Content = () => {
         <Paper className={fixedHeightPaper}>
           <Title>Hugo Configuration</Title>
           <FormControl fullWidth className={classes.margin} variant="outlined">
-            <InputLabel htmlFor="outlined-adornment-name">Website Name</InputLabel>
+            <InputLabel htmlFor="outlined-adornment-name">Website name</InputLabel>
             <Input
               id="outlined-adornment-name"
               value={values.name}
@@ -88,6 +90,22 @@ const Content = () => {
               id="outlined-adornment-url"
               value={values.url}
               onChange={handleChange('url')}
+            />
+          </FormControl>
+          <FormControl fullWidth className={classes.margin} variant="outlined">
+            <InputLabel htmlFor="outlined-adornment-amount">Build directory</InputLabel>
+            <Input
+              id="outlined-adornment-url"
+              value={values.publishDirectory}
+              onChange={handleChange('publishDirectory')}
+            />
+          </FormControl>
+          <FormControl fullWidth className={classes.margin} variant="outlined">
+            <InputLabel htmlFor="outlined-adornment-amount">Google Analytics tracking ID (leave blank if not applied)</InputLabel>
+            <Input
+              id="outlined-adornment-url"
+              value={values.googleAnalytics}
+              onChange={handleChange('googleAnalytics')}
             />
           </FormControl>
         </Paper>
