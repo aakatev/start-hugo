@@ -41,6 +41,10 @@ const Generator = () => {
     pagination: null
   })
 
+  const [options, setOptions] = React.useState({
+    stylesFormat: 'css',
+    pregenerateMD: 'yes'
+  })
 
   const generateCode = () => {
     var url = `${window.location}api/index`
@@ -77,7 +81,10 @@ const Generator = () => {
         </Grid>
         <Grid item xs={12} md={4} lg={3}>
           <Paper className={fixedHeightPaper}>
-            <Options />
+            <Options 
+              options={options}
+              setOptions={setOptions}
+            />
           </Paper>
         </Grid>
 

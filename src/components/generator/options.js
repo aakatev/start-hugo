@@ -6,7 +6,11 @@ import FormControlLabel from '@material-ui/core/FormControlLabel'
 import FormLabel from '@material-ui/core/FormLabel'
 import Radio from '@material-ui/core/Radio'
 
-export default function Options() {
+export default function Options({ options, setOptions }) {
+  const handleOptionsChange = (prop) => (event) => {
+    setOptions({ ...options, [prop]: event.target.value })
+  }
+
   return (
     <React.Fragment>
       <Title>Generator Options</Title>
@@ -15,12 +19,12 @@ export default function Options() {
         <RadioGroup
           aria-label="gender"
           name="gender1"
-          value={'male'}
-          onChange={() => {}}
+          value={options.stylesFormat}
+          onChange={handleOptionsChange('stylesFormat')}
         >
-          <FormControlLabel value="female" control={<Radio />} label="CSS" />
-          <FormControlLabel value="male" control={<Radio />} label="SASS" />
-          <FormControlLabel value="other" control={<Radio />} label="SCSS" />
+          <FormControlLabel value="css" control={<Radio />} label="CSS" />
+          <FormControlLabel value="sass" control={<Radio />} label="SASS" />
+          <FormControlLabel value="scss" control={<Radio />} label="SCSS" />
         </RadioGroup>
       </FormControl>
       <FormControl component="fieldset">
@@ -28,11 +32,11 @@ export default function Options() {
         <RadioGroup
           aria-label="gender"
           name="gender1"
-          value={'female'}
-          onChange={() => {}}
+          value={options.pregenerateMD}
+          onChange={handleOptionsChange('pregenerateMD')}
         >
-          <FormControlLabel value="female" control={<Radio />} label="Yes" />
-          <FormControlLabel value="other" control={<Radio />} label="No" />
+          <FormControlLabel value={'yes'} control={<Radio />} label="Yes" />
+          <FormControlLabel value={'no'} control={<Radio />} label="No" />
         </RadioGroup>
       </FormControl>
     </React.Fragment>

@@ -67,7 +67,6 @@ export default function Configuration({ configuration, setConfiguration }) {
           <Checkbox
             checked={isToggleOn('pagination')}
             onChange={handleConfigurationToggle('pagination')}
-            name="gilad"
           />
         }
         label="Pagination"
@@ -92,7 +91,6 @@ export default function Configuration({ configuration, setConfiguration }) {
           <Checkbox
             checked={isToggleOn('googleAnalytics')}
             onChange={handleConfigurationToggle('googleAnalytics')}
-            name="gilad"
           />
         }
         label="Google Analytics"
