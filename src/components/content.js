@@ -8,6 +8,11 @@ import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import Button from '@material-ui/core/Button';
+import Title from './title';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormLabel from '@material-ui/core/FormLabel';
+import Radio from '@material-ui/core/Radio';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -66,16 +71,15 @@ const Content = () => {
   return(
     <Container maxWidth="lg" className={classes.container}>
     <Grid container spacing={3}>
-      {/* Chart */}
       <Grid item xs={12} md={8} lg={9}>
         <Paper className={fixedHeightPaper}>
+          <Title>Hugo Configuration</Title>
           <FormControl fullWidth className={classes.margin} variant="outlined">
             <InputLabel htmlFor="outlined-adornment-name">Website Name</InputLabel>
             <Input
               id="outlined-adornment-name"
               value={values.name}
               onChange={handleChange('name')}
-              labelWidth={60}
             />
           </FormControl>
           <FormControl fullWidth className={classes.margin} variant="outlined">
@@ -84,7 +88,6 @@ const Content = () => {
               id="outlined-adornment-url"
               value={values.url}
               onChange={handleChange('url')}
-              labelWidth={60}
             />
           </FormControl>
         </Paper>
@@ -92,31 +95,46 @@ const Content = () => {
       {/* Recent Deposits */}
       <Grid item xs={12} md={4} lg={3}>
         <Paper className={fixedHeightPaper}>
-          section 2
+          <Title>Other Options</Title>
+          <FormControl component="fieldset">
+            <FormLabel component="legend">Stylesheets format</FormLabel>
+            <RadioGroup aria-label="gender" name="gender1" value={'male'} onChange={handleChange}>
+              <FormControlLabel value="female" control={<Radio />} label="CSS" />
+              <FormControlLabel value="male" control={<Radio />} label="SASS" />
+              <FormControlLabel value="other" control={<Radio />} label="SCSS" />
+            </RadioGroup>
+          </FormControl>
+          <FormControl component="fieldset">
+            <FormLabel component="legend">Pregenerate MarkDown</FormLabel>
+            <RadioGroup aria-label="gender" name="gender1" value={'female'} onChange={handleChange}>
+              <FormControlLabel value="female" control={<Radio />} label="Yes" />
+              <FormControlLabel value="other" control={<Radio />} label="No" />
+            </RadioGroup>
+          </FormControl>
         </Paper>
       </Grid>
       <Grid item xs={12}>
         <Paper className={classes.paper}>
+          <Title>Scripts</Title>
           <FormControl fullWidth className={classes.margin} variant="outlined">
-            <InputLabel htmlFor="outlined-adornment-scripts">Scripts</InputLabel>
+            <InputLabel htmlFor="outlined-adornment-scripts">Link in a format https://example.com/script.js</InputLabel>
             <Input
               id="outlined-adornment-scripts"
               value={values.scripts}
               onChange={handleChange('scripts')}
-              labelWidth={60}
             />
           </FormControl>
         </Paper>
       </Grid>
       <Grid item xs={12}>
         <Paper className={classes.paper}>
+          <Title>Stylesheets</Title>
           <FormControl fullWidth className={classes.margin} variant="outlined">
-            <InputLabel htmlFor="outlined-adornment-name">Stylesheets</InputLabel>
+            <InputLabel htmlFor="outlined-adornment-name">Link in a format https://example.com/styles.css</InputLabel>
             <Input
               id="outlined-adornment-styles"
               value={values.styles}
               onChange={handleChange('styles')}
-              labelWidth={60}
             />
           </FormControl>
         </Paper>
