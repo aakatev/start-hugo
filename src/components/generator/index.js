@@ -4,17 +4,11 @@ import Container from '@material-ui/core/Container'
 import Grid from '@material-ui/core/Grid'
 import Paper from '@material-ui/core/Paper'
 import clsx from 'clsx'
-import Input from '@material-ui/core/Input'
-import InputLabel from '@material-ui/core/InputLabel'
-import FormControl from '@material-ui/core/FormControl'
 import Button from '@material-ui/core/Button'
-import Title from '../title'
-import RadioGroup from '@material-ui/core/RadioGroup'
-import FormControlLabel from '@material-ui/core/FormControlLabel'
-import FormLabel from '@material-ui/core/FormLabel'
-import Radio from '@material-ui/core/Radio'
 
 import Configuration from './configuration'
+import Options from './options'
+import Assets from './assets'
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -41,12 +35,8 @@ const Generator = () => {
 
   const [configuration, setConfiguration] = React.useState({
     name: 'Hugo Starter Project',
-    url: 'example.com',
+    url: 'https://example.com',
     publishDirectory: 'docs',
-    scripts:
-      'https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js',
-    styles:
-      'https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/css/bootstrap.min.css',
     googleAnalytics: '',
   })
 
@@ -81,95 +71,21 @@ const Generator = () => {
       <Grid container spacing={3}>
         <Grid item xs={12} md={8} lg={9}>
           <Paper className={fixedHeightPaper}>
-          <Configuration configuration={configuration} handleConfigurationChange={handleConfigurationChange}/>  
+            <Configuration
+              configuration={configuration}
+              handleConfigurationChange={handleConfigurationChange}
+            />
           </Paper>
         </Grid>
         <Grid item xs={12} md={4} lg={3}>
           <Paper className={fixedHeightPaper}>
-            <Title>Other Options</Title>
-            <FormControl component="fieldset">
-              <FormLabel component="legend">Stylesheets format</FormLabel>
-              <RadioGroup
-                aria-label="gender"
-                name="gender1"
-                value={'male'}
-                onChange={handleConfigurationChange}
-              >
-                <FormControlLabel
-                  value="female"
-                  control={<Radio />}
-                  label="CSS"
-                />
-                <FormControlLabel
-                  value="male"
-                  control={<Radio />}
-                  label="SASS"
-                />
-                <FormControlLabel
-                  value="other"
-                  control={<Radio />}
-                  label="SCSS"
-                />
-              </RadioGroup>
-            </FormControl>
-            <FormControl component="fieldset">
-              <FormLabel component="legend">Pregenerate MarkDown</FormLabel>
-              <RadioGroup
-                aria-label="gender"
-                name="gender1"
-                value={'female'}
-                onChange={handleConfigurationChange}
-              >
-                <FormControlLabel
-                  value="female"
-                  control={<Radio />}
-                  label="Yes"
-                />
-                <FormControlLabel
-                  value="other"
-                  control={<Radio />}
-                  label="No"
-                />
-              </RadioGroup>
-            </FormControl>
+            <Options />
           </Paper>
         </Grid>
+
         <Grid item xs={12}>
           <Paper className={classes.paper}>
-            <Title>Scripts</Title>
-            <FormControl
-              fullWidth
-              className={classes.margin}
-              variant="outlined"
-            >
-              <InputLabel htmlFor="outlined-adornment-scripts">
-                Link in a format https://example.com/script.js
-              </InputLabel>
-              <Input
-                id="outlined-adornment-scripts"
-                value={configuration.scripts}
-                onChange={handleConfigurationChange('scripts')}
-              />
-            </FormControl>
-          </Paper>
-        </Grid>
-        <Grid item xs={12}>
-          <Paper className={classes.paper}>
-            <Title>Stylesheets</Title>
-            <FormControl
-              fullWidth
-              className={classes.margin}
-              variant="outlined"
-            >
-              <InputLabel htmlFor="outlined-adornment-name">
-                Link in a format https://example.com/styles.css
-              </InputLabel>
-              <Input
-                id="outlined-adornment-styles"
-                value={configuration.styles}
-                onChange={handleConfigurationChange('styles')}
-              />
-            </FormControl>
+           <Assets/>
           </Paper>
         </Grid>
       </Grid>

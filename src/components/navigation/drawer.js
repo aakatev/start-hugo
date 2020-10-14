@@ -5,12 +5,12 @@ import Drawer from '@material-ui/core/Drawer'
 import List from '@material-ui/core/List'
 import Divider from '@material-ui/core/Divider'
 import IconButton from '@material-ui/core/IconButton'
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
+import CloseIcon from '@material-ui/icons/Close'
 import { makeStyles } from '@material-ui/core/styles'
 
 import { mainListItems, secondaryListItems } from './links'
 
-const drawerWidth = '80vw'
+const drawerWidth = '100vw'
 
 const useStyles = makeStyles((theme) => ({
   toolbarIcon: {
@@ -54,7 +54,7 @@ const NavigationDrawer = ({ handleDrawerClose, open }) => {
     >
       <div className={classes.toolbarIcon}>
         <IconButton onClick={handleDrawerClose}>
-          <ChevronLeftIcon />
+          <CloseIcon fontSize="large" />
         </IconButton>
       </div>
       <Divider />

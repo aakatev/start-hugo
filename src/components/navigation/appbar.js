@@ -6,7 +6,7 @@ import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
 import IconButton from '@material-ui/core/IconButton'
-import MenuIcon from '@material-ui/icons/Menu'
+import HelpIcon from '@material-ui/icons/Help'
 import GitHubIcon from '@material-ui/icons/GitHub'
 import Link from '@material-ui/core/Link'
 
@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
     }),
   },
   menuButton: {
-    marginRight: 36,
+    marginRight: 5,
   },
   menuButtonHidden: {
     display: 'none',
@@ -39,15 +39,6 @@ const NavigationAppBar = ({ handleDrawerOpen, open }) => {
       className={clsx(classes.appBar)}
     >
       <Toolbar className={classes.toolbar}>
-        <IconButton
-          edge="start"
-          color="inherit"
-          aria-label="open drawer"
-          onClick={handleDrawerOpen}
-          className={clsx(classes.menuButton)}
-        >
-          <MenuIcon />
-        </IconButton>
         <Typography
           component="h1"
           variant="h6"
@@ -58,11 +49,20 @@ const NavigationAppBar = ({ handleDrawerOpen, open }) => {
           Hugo Generator
         </Typography>
         <IconButton
+          edge="start"
+          color="inherit"
+          aria-label="open drawer"
+          onClick={handleDrawerOpen}
+          className={clsx(classes.menuButton)}
+        >
+          <HelpIcon fontSize="large" />
+        </IconButton>
+        <IconButton
           component={Link}
           href="https://github.com/aakatev/start-hugo"
           color="inherit"
         >
-          <GitHubIcon />
+          <GitHubIcon fontSize="large" />
         </IconButton>
       </Toolbar>
     </AppBar>
