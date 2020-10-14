@@ -99,6 +99,7 @@ const Generator = () => {
           variant="outlined"
           color="primary"
           onClick={() => generateCode()}
+          size="large" 
         >
           GENERATE
         </Button>
