@@ -27,6 +27,7 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     flexGrow: 1,
+    fontWeight: 70
   },
 }))
 
@@ -38,7 +39,7 @@ const NavigationAppBar = ({ handleDrawerOpen, open }) => {
       <Toolbar className={classes.toolbar}>
         <Typography
           component="h1"
-          variant="h6"
+          variant="h4"
           color="inherit"
           noWrap
           className={classes.title}

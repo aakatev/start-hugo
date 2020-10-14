@@ -37,12 +37,10 @@ const Generator = () => {
     name: 'Hugo Starter Project',
     url: 'https://example.com',
     publishDirectory: 'docs',
-    googleAnalytics: '',
+    googleAnalytics: null,
+    pagination: null
   })
 
-  const handleConfigurationChange = (prop) => (event) => {
-    setConfiguration({ ...configuration, [prop]: event.target.value })
-  }
 
   const generateCode = () => {
     var url = `${window.location}api/index`
@@ -73,7 +71,7 @@ const Generator = () => {
           <Paper className={fixedHeightPaper}>
             <Configuration
               configuration={configuration}
-              handleConfigurationChange={handleConfigurationChange}
+              setConfiguration={setConfiguration}
             />
           </Paper>
         </Grid>
