@@ -2,7 +2,7 @@ import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 
 import Navigation from './navigation'
-import Content from './content'
+import Generator from './generator'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -23,7 +23,7 @@ function App() {
       <Navigation />
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
-        <Content />
+        <Generator />
       </main>
     </div>
   )
