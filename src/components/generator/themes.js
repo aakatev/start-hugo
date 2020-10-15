@@ -51,33 +51,69 @@ function getModalStyle() {
   }
 }
 
-export default function Themes({ assets, setAssets }) {
+export default function Themes({ themes, setThemes }) {
   const classes = useStyles()
 
-  const hanldeRemoveAsset = (item) => {
-    setAssets([...assets.filter((i) => i !== item)])
+  const handleRemoveTheme = (item) => {
+    setThemes([...themes.filter((i) => i !== item)])
   }
 
-  const hanldeUpdateAsset = (index) => (event) => {
-    let newAssets = [...assets]
-    newAssets[index] = event.target.value
-    setAssets(newAssets)
+  const handleUpdateTheme = (index) => (event) => {
+    let newthemes = [...themes]
+    newthemes[index] = event.target.value
+    setThemes(newthemes)
+  }
+
+  const handleAddTheme = (theme) => {
+    let newthemes = [...themes, theme]
+    setThemes(newthemes)
   }
 
   const [modalStyle] = React.useState(getModalStyle)
   const [open, setOpen] = React.useState(false)
+  const [text, setText] = React.useState('')
+  const [title, setTitle] = React.useState('')
+  const [button, setButton] = React.useState('')
+  const [index, setIndex] = React.useState(null)
 
-  const handleOpen = () => {
+  const handleOpen = (action, index = null) => {
+    if (action === 'add') {
+      setTitle('Add new theme')
+      setButton('Add theme')
+    }
+    if (action === 'edit') {
+      setTitle('Edit existing theme')
+      setButton('Edit theme')
+      setIndex(index)
+      setText(themes[index])
+    }
     setOpen(true)
   }
 
   const handleClose = () => {
+    setTitle('')
+    setButton('')
+    setIndex(null)
+    setOpen(false)
+  }
+
+  const handleSubmit = () => {
+    if (index) {
+      let newthemes = [...themes]
+      newthemes[index] = text
+      setThemes(newthemes)
+    } else {
+      handleAddTheme(text)
+    }
+    setTitle('')
+    setButton('')
+    setText('')
     setOpen(false)
   }
 
   const body = (
     <div style={modalStyle} className={classes.modalPaper}>
-      <Title>Add new theme</Title>
+      <Title>{title}</Title>
       <Grid xs={12} item>
         <FormControl fullWidth className={classes.margin} variant="outlined">
           <InputLabel htmlFor="outlined-adornment-name">
@@ -85,14 +121,14 @@ export default function Themes({ assets, setAssets }) {
           </InputLabel>
           <Input
             id="outlined-adornment-styles"
-            value={'url'}
-            onChange={hanldeUpdateAsset()}
+            value={text}
+            onChange={(event) => setText(event.target.value)}
           />
         </FormControl>
       </Grid>{' '}
       <Grid xs={6} item>
-        <Button onClick={handleOpen} color="primary">
-          Add theme
+        <Button onClick={() => handleSubmit()} color="primary">
+          {button}
         </Button>
       </Grid>
     </div>
@@ -100,17 +136,17 @@ export default function Themes({ assets, setAssets }) {
 
   return (
     <React.Fragment>
-      <Title>Themes ({assets.length})</Title>
+      <Title>Themes ({themes.length})</Title>
       <Alert severity="warning">
         Warning! This feature is experimental. The themes will not be added
         directly to the generated project, but you will be provided with a shell
         script to obtain them.
       </Alert>
-      {assets.length === 0 ? (
+      {themes.length === 0 ? (
         <Typography>No themes added</Typography>
       ) : (
-        assets.map((url, index) => (
-          <Grid xs={12} key={url + index} item>
+        themes.map((url, index) => (
+          <Grid xs={12} key={url + Date.now()*Math.random()} item>
             <FormControl
               fullWidth
               className={classes.margin}
@@ -120,13 +156,13 @@ export default function Themes({ assets, setAssets }) {
                 disabled
                 id="outlined-adornment-styles"
                 value={url}
-                onChange={hanldeUpdateAsset(index)}
+                onChange={handleUpdateTheme(index)}
                 endAdornment={
                   <InputAdornment position="end">
-                    <IconButton onClick={() => hanldeRemoveAsset(url)}>
+                    <IconButton onClick={() => handleOpen('edit', index)}>
                       <EditIcon />
                     </IconButton>
-                    <IconButton onClick={() => hanldeRemoveAsset(url)}>
+                    <IconButton onClick={() => handleRemoveTheme(url)}>
                       <DeleteIcon />
                     </IconButton>
                   </InputAdornment>
@@ -137,7 +173,7 @@ export default function Themes({ assets, setAssets }) {
         ))
       )}
       <Grid xs={6} item>
-        <Button onClick={handleOpen} color="primary">
+        <Button onClick={() => handleOpen('add')} color="primary">
           Add theme
         </Button>
       </Grid>

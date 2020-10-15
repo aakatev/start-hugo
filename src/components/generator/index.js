@@ -46,9 +46,7 @@ const Generator = () => {
     pregenerateMD: 'yes',
   })
 
-  const [assets, setAssets] = React.useState([
-    'https://github.com/budparr/gohugo-theme-ananke.git',
-    'https://github.com/themefisher/airspace-hugo.git',
+  const [themes, setThemes] = React.useState([
     'https://github.com/Shen-Yu/hugo-chart.git'
   ])
 
@@ -95,14 +93,14 @@ const Generator = () => {
 
         <Grid item xs={12}>
           <Paper className={classes.paper}>
-            <Themes assets={assets} setAssets={setAssets} />
+            <Themes themes={themes} setThemes={setThemes} />
           </Paper>
         </Grid>
       </Grid>
       <Grid className={classes.button} item xs={12}>
         <Button
           variant="outlined"
-          color="primary"
+          color="secondary"
           onClick={() => generateCode()}
           size="large"
         >
