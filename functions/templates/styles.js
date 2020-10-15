@@ -1,45 +1,127 @@
-const stylesFile = `html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed, 
-figure, figcaption, footer, header, hgroup, 
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	font-size: 100%;
-	font: inherit;
-	vertical-align: baseline;
-}
-/* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure, 
-footer, header, hgroup, menu, nav, section {
-	display: block;
-}
+const cssStylesFile = `@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+
 body {
-	line-height: 1;
+	margin: 0;
+	font-family: 'Roboto', sans-serif;
+	font-size: 1.4rem;
 }
-ol, ul {
-	list-style: none;
+
+ul {
+  list-style-type: none;
+  margin: 0;
+	padding: 0;
+	padding-top: 5px;
+	padding-bottom: 5px;
+  overflow: hidden;
+  background-color: #0a1922;
+  position: fixed;
+  top: 0;
+  width: 100%;
 }
-blockquote, q {
-	quotes: none;
+
+li {
+  float: left;
 }
-blockquote:before, blockquote:after,
-q:before, q:after {
-	content: '';
-	content: none;
+
+li a {
+  display: block;
+  color: #fff;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
 }
-table {
-	border-collapse: collapse;
-	border-spacing: 0;
+
+li a:hover:not(.active) {
+  background-color: #111;
+}
+
+.layout {
+	padding-top: 40px;
+	margin: 50px;
+	text-align: center;
+}
+
+.lead {
+	font-weight: 800;
+	font-size: 1.2em;
+}
+
+.content-index {
+	max-width: 650px;
+	margin: auto;
+}
+
+.content-post {
+	max-width:500px;
+	margin: auto;
+}
+
+.content-post pre {
+	overflow: scroll;
 }`
 
-module.exports = stylesFile
+const sassStyelsFile = `
+body
+	margin: 0
+	font-family: 'Roboto', sans-serif
+	font-size: 1.4rem
+
+ul	
+	list-style-type: none
+	margin: 0
+	padding: 0
+	padding-top: 5px
+	padding-bottom: 5px
+	overflow: hidden
+	background-color: #0a1922
+	position: fixed
+	top: 0
+	width: 100%
+
+
+li 
+  float: left
+
+
+li 
+	a 
+		display: block
+		color: #fff
+		text-align: center
+		padding: 14px 16px
+		text-decoration: none
+
+	a:hover:not(.active) 
+	  background-color: #111
+
+
+.layout 
+	padding-top: 40px
+	margin: 50px
+	text-align: center
+
+
+.lead 
+	font-weight: 800
+	font-size: 1.2em
+
+
+.content-index 
+	max-width: 650px
+	margin: auto
+
+
+.content-post 
+	max-width:500px
+	margin: auto
+
+
+.content-post 
+	pre 
+		overflow: scroll
+`
+
+const CreateStylesFile = ({ stylesFormat }) =>
+  stylesFormat === 'sass' ? sassStyelsFile : cssStylesFile
+
+module.exports = CreateStylesFile

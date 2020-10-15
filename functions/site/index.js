@@ -1,10 +1,10 @@
 const baseOfFile = require('../templates/base.js')
 const singleFile = require('../templates/single.js')
 const listFile = require('../templates/list.js')
-const stylesFile = require('../templates/styles.js')
 const archetypeFile = require('../templates/archetype.js')
 const createConfigFile = require('../templates/config.js')
 const createBaseOfFile = require('../templates/base.js')
+const createStylesFile = require('../templates/styles.js')
 
 const siteFactory = (attributes) => {
   let configArgs = {
@@ -20,8 +20,14 @@ const siteFactory = (attributes) => {
     googleAnalytics: attributes.configuration.googleAnalytics,
   }
 
+  let stylesArgs = {
+    stylesFormat: attributes.options.stylesFormat
+  }
+
   let configFile = createConfigFile(configArgs)
   let baseOfFile = createBaseOfFile(baseOfArgs)
+  let stylesFile = createStylesFile(stylesArgs)
+
 
   return {
     configFile,
