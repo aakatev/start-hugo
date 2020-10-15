@@ -75,22 +75,25 @@ export default function Themes({ themes, setThemes }) {
   const [title, setTitle] = React.useState('')
   const [button, setButton] = React.useState('')
   const [index, setIndex] = React.useState(null)
+  const [error, setError] = React.useState(false)
 
   const handleOpen = (action, index = null) => {
     if (action === 'add') {
       setTitle('Add new theme')
       setButton('Add theme')
-    }
-    if (action === 'edit') {
+    } else if (action === 'edit') {
       setTitle('Edit existing theme')
       setButton('Edit theme')
       setIndex(index)
       setText(themes[index])
     }
+    setError(false)
     setOpen(true)
   }
 
   const handleClose = () => {
+    setText('')
+    setError(false)
     setTitle('')
     setButton('')
     setIndex(null)
@@ -98,26 +101,31 @@ export default function Themes({ themes, setThemes }) {
   }
 
   const handleSubmit = () => {
-    if (index) {
+    if (!/https:\/\/github.com\/.*git$/.test(text)) {
+      setError(true)
+      return
+    } else if (index !== null) {
       let newthemes = [...themes]
       newthemes[index] = text
       setThemes(newthemes)
     } else {
       handleAddTheme(text)
     }
-    setTitle('')
-    setButton('')
-    setText('')
-    setOpen(false)
+    handleClose()
   }
 
   const body = (
     <div style={modalStyle} className={classes.modalPaper}>
       <Title>{title}</Title>
       <Grid xs={12} item>
-        <FormControl fullWidth className={classes.margin} variant="outlined">
+        <FormControl
+          error={error}
+          fullWidth
+          className={classes.margin}
+          variant="outlined"
+        >
           <InputLabel htmlFor="outlined-adornment-name">
-            In a format of https://github.com/budparr/gohugo-theme-ananke.git
+            {'In a format of https://github.com/<organization>/<repo>.git'}
           </InputLabel>
           <Input
             id="outlined-adornment-styles"
@@ -146,7 +154,7 @@ export default function Themes({ themes, setThemes }) {
         <Typography>No themes added</Typography>
       ) : (
         themes.map((url, index) => (
-          <Grid xs={12} key={url + Date.now()*Math.random()} item>
+          <Grid xs={12} key={url + Date.now() * Math.random()} item>
             <FormControl
               fullWidth
               className={classes.margin}
