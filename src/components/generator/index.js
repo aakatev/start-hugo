@@ -38,13 +38,20 @@ const Generator = () => {
     url: 'https://example.com',
     publishDirectory: 'docs',
     googleAnalytics: null,
-    pagination: null
+    pagination: null,
   })
 
   const [options, setOptions] = React.useState({
     stylesFormat: 'css',
-    pregenerateMD: 'yes'
+    pregenerateMD: 'yes',
   })
+
+  const [assets, setAssets] = React.useState([
+    'https://example.com/styles1.css',
+    'https://example.com/styles2.css',
+    'https://example.com/script1.js',
+    'https://example.com/script2.js',
+  ])
 
   const generateCode = () => {
     var url = `${window.location}api/index`
@@ -81,16 +88,13 @@ const Generator = () => {
         </Grid>
         <Grid item xs={12} md={4} lg={3}>
           <Paper className={fixedHeightPaper}>
-            <Options 
-              options={options}
-              setOptions={setOptions}
-            />
+            <Options options={options} setOptions={setOptions} />
           </Paper>
         </Grid>
 
         <Grid item xs={12}>
           <Paper className={classes.paper}>
-           <Assets/>
+            <Assets assets={assets} setAssets={setAssets} />
           </Paper>
         </Grid>
       </Grid>
@@ -99,7 +103,7 @@ const Generator = () => {
           variant="outlined"
           color="primary"
           onClick={() => generateCode()}
-          size="large" 
+          size="large"
         >
           GENERATE
         </Button>

@@ -10,7 +10,7 @@ import Grid from '@material-ui/core/Grid'
 import IconButton from '@material-ui/core/IconButton'
 import DeleteIcon from '@material-ui/icons/Delete'
 import InputAdornment from '@material-ui/core/InputAdornment'
-import Button from '@material-ui/core/Button';
+import Button from '@material-ui/core/Button'
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -30,39 +30,29 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-export default function Assets() {
+export default function Assets({ assets, setAssets }) {
   const classes = useStyles()
+
+  const hanldeRemoveAsset = (item) => {
+    setAssets([...assets.filter(i => i !==item)])
+  }
 
   return (
     <React.Fragment>
       <Title>Assets</Title>
-      <Grid container spacing={1} alignItems="flex-end">
-        <Grid xs={12} md={1} item>
-          <FormControl className={classes.margin}>
-            <InputLabel id="demo-customized-select-label">Type</InputLabel>
-            <Select
-              labelId="demo-customized-select-label"
-              id="demo-customized-select"
-              value={'CSS'}
-              onChange={() => {}}
-            >
-              <MenuItem value={'CSS'}>CSS</MenuItem>
-              <MenuItem value={'JS'}>JS</MenuItem>
-            </Select>
-          </FormControl>
-        </Grid>
-        <Grid xs={12} md={11} item>
+      {assets.map((url, index) => (
+        <Grid xs={12} key={url+index} item>
           <FormControl fullWidth className={classes.margin} variant="outlined">
             <InputLabel htmlFor="outlined-adornment-name">
-              Link in a format https://example.com/styles.css
+              Link in a format https://example.com/style.css
             </InputLabel>
             <Input
               id="outlined-adornment-styles"
-              value={'https://example.com/styles.css'}
+              value={url}
               onChange={() => {}}
               endAdornment={
                 <InputAdornment position="end">
-                  <IconButton onClick={() => {}}>
+                  <IconButton onClick={() => hanldeRemoveAsset(url)}>
                     <DeleteIcon />
                   </IconButton>
                 </InputAdornment>
@@ -70,7 +60,7 @@ export default function Assets() {
             />
           </FormControl>
         </Grid>
-      </Grid>
+      ))}
       <Grid xs={6} item>
         <Button color="primary">Add CSS/JS</Button>
       </Grid>
