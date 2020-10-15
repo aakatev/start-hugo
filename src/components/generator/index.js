@@ -61,7 +61,7 @@ const Generator = () => {
       body: JSON.stringify({
         configuration,
         options,
-        assets
+        themes
       }),
     })
       .then((response) => response.blob())
