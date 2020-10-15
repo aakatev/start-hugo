@@ -41,16 +41,29 @@ const Generator = () => {
     pagination: null,
   })
 
+  const [configurationError, setConfigurationError] = React.useState(false)
+
   const [options, setOptions] = React.useState({
     stylesFormat: 'css',
     pregenerateMD: 'yes',
   })
 
   const [themes, setThemes] = React.useState([
-    'https://github.com/Shen-Yu/hugo-chart.git'
+    'https://github.com/Shen-Yu/hugo-chart.git',
   ])
 
   const generateCode = () => {
+    if (
+      configuration.name === '' ||
+      configuration.url === '' ||
+      configuration.publishDirectory === '' ||
+      configuration.googleAnalytics === '' ||
+      configuration.pagination === ''
+    ) {
+      setConfigurationError(true)
+      return
+    }
+
     var url = `${window.location}api/index`
     fetch(url, {
       method: 'POST',
@@ -61,7 +74,7 @@ const Generator = () => {
       body: JSON.stringify({
         configuration,
         options,
-        themes
+        themes,
       }),
     })
       .then((response) => response.blob())
@@ -81,6 +94,7 @@ const Generator = () => {
           <Paper className={fixedHeightPaper}>
             <Configuration
               configuration={configuration}
+              configurationError={configurationError}
               setConfiguration={setConfiguration}
             />
           </Paper>

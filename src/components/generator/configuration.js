@@ -13,7 +13,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-export default function Configuration({ configuration, setConfiguration }) {
+export default function Configuration({
+  configuration,
+  configurationError,
+  setConfiguration,
+}) {
   const classes = useStyles()
 
   const handleConfigurationChange = (prop) => (event) => {
@@ -32,7 +36,12 @@ export default function Configuration({ configuration, setConfiguration }) {
   return (
     <React.Fragment>
       <Title>Hugo Configuration</Title>
-      <FormControl fullWidth className={classes.margin} variant="outlined">
+      <FormControl
+        error={configurationError && configuration.name === ''}
+        fullWidth
+        className={classes.margin}
+        variant="outlined"
+      >
         <InputLabel htmlFor="outlined-adornment-name">
           Your website name
         </InputLabel>
@@ -42,7 +51,12 @@ export default function Configuration({ configuration, setConfiguration }) {
           onChange={handleConfigurationChange('name')}
         />
       </FormControl>
-      <FormControl fullWidth className={classes.margin} variant="outlined">
+      <FormControl
+        error={configurationError && configuration.url === ''}
+        fullWidth
+        className={classes.margin}
+        variant="outlined"
+      >
         <InputLabel htmlFor="outlined-adornment-amount">
           Base URL with protocol e.g. https
         </InputLabel>
@@ -52,7 +66,12 @@ export default function Configuration({ configuration, setConfiguration }) {
           onChange={handleConfigurationChange('url')}
         />
       </FormControl>
-      <FormControl fullWidth className={classes.margin} variant="outlined">
+      <FormControl
+        error={configurationError && configuration.publishDirectory === ''}
+        fullWidth
+        className={classes.margin}
+        variant="outlined"
+      >
         <InputLabel htmlFor="outlined-adornment-amount">
           Build directory
         </InputLabel>
@@ -74,7 +93,12 @@ export default function Configuration({ configuration, setConfiguration }) {
       {configuration.pagination === null ? (
         ''
       ) : (
-        <FormControl fullWidth className={classes.margin} variant="outlined">
+        <FormControl
+          error={configurationError && configuration.pagination === ''}
+          fullWidth
+          className={classes.margin}
+          variant="outlined"
+        >
           <InputLabel htmlFor="outlined-adornment-amount">
             Number of posts per page
           </InputLabel>
@@ -98,7 +122,12 @@ export default function Configuration({ configuration, setConfiguration }) {
       {configuration.googleAnalytics === null ? (
         ''
       ) : (
-        <FormControl fullWidth className={classes.margin} variant="outlined">
+        <FormControl
+          error={configurationError && configuration.googleAnalytics === ''}
+          fullWidth
+          className={classes.margin}
+          variant="outlined"
+        >
           <InputLabel htmlFor="outlined-adornment-amount">
             Google Analytics tracking ID
           </InputLabel>
