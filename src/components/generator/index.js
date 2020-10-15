@@ -62,7 +62,9 @@ const Generator = () => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        //Body
+        configuration,
+        options,
+        assets
       }),
     })
       .then((response) => response.blob())

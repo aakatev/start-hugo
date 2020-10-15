@@ -13,74 +13,53 @@ const formatResponse = function (body) {
   return response
 }
 
-const configFile = require('./templates/config.js')
 const baseOfFile = require('./templates/base.js')
 const singleFile = require('./templates/single.js')
 const listFile = require('./templates/list.js')
 const stylesFile = require('./templates/styles.js')
 const archetypeFile = require('./templates/archetype.js')
 const scriptFile = require('./templates/script')
-
-const createPostFile = (title, body) => `---
-title: '${title}'
-draft: false
----
-${body}`
-
+const createPostFile = require('./templates/content')
+const createConfigFile = require('./templates/config.js')
+const createBaseOfFile = require('./templates/base.js')
 
 exports.handler = async (event) => {
   return (promise = new Promise((resolve, reject) => {
     let zip = Archiver('zip')
-    zip
-      .append(
-        configFile,
-        { name: 'config.toml' }
-      )
-      .append(
-        baseOfFile,
-        { name: 'layouts/_default/baseof.html' }
-      )
-      .append(
-        singleFile, 
-        { name: 'layouts/_default/single.html'}
-      )
-      .append(
-        listFile, 
-        { name: 'layouts/_default/list.html'}
-      )
-      .append(
-        stylesFile, 
-        { name: 'assets/styles/main.css'}
-      )
-      .append(
-        scriptFile, 
-        { name: 'assets/js/index.js'}
-      )
-      .append(
-        archetypeFile, 
-        { name: 'archetypes/default.md'}
-      )
-      .append(
-        createPostFile('My First Post', '## Welcome to my first post'), 
-        { name: 'content/posts/my-first-post.md'}
-      )
-      .append(
-        createPostFile('My Other Post', '## Welcome to my other post'), 
-        { name: 'content/posts/my-other-post.md'}
-      )
-      .append(
-        '', 
-        { name: 'data/.gitkeep'}
-      )
-      .append(
-        '', 
-        { name: 'themes/.gitkeep'}
-      )
-      .append(
-        '', 
-        { name: 'static/.gitkeep'}
-      )
-      .finalize()
+    let json = JSON.parse(event.body)
+    console.log(json)
+    let configArgs = {
+      baseURL: json.configuration.url,
+      title: json.configuration.name,
+      publishDir: json.configuration.publishDirectory,
+      paginate: json.configuration.pagination,
+      googleAnalytics: json.configuration.googleAnalytics
+    }
+    let configFile = createConfigFile(configArgs)
+    zip.append(configFile, { name: 'config.toml' })
+
+    let baseOfArgs = {
+      stylesFormat: json.options.stylesFormat,
+      googleAnalytics: json.configuration.googleAnalytics,
+    }
+
+    let baseOfFile = createBaseOfFile(baseOfArgs)
+
+    zip.append(baseOfFile, { name: 'layouts/_default/baseof.html' })
+    zip.append(singleFile, { name: 'layouts/_default/single.html' })
+    zip.append(listFile, { name: 'layouts/_default/list.html' })
+    zip.append(stylesFile, { name: `assets/styles/main.${json.options.stylesFormat}` })
+    zip.append(archetypeFile, { name: 'archetypes/default.md' })
+    zip.append(createPostFile('My First Post', '## Welcome to my first post'), {
+      name: 'content/posts/my-first-post.md',
+    })
+    zip.append(createPostFile('My Other Post', '## Welcome to my other post'), {
+      name: 'content/posts/my-other-post.md',
+    })
+    zip.append('', { name: 'data/.gitkeep' })
+    zip.append('', { name: 'themes/.gitkeep' })
+    zip.append('', { name: 'static/.gitkeep' })
+    zip.finalize()
 
     let buffer = []
 

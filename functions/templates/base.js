@@ -1,14 +1,18 @@
-const baseOfFile = `<!doctype html>
+const createBaseOfFile = ({ stylesFormat, googleAnalytics }) => `<!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    ${
+      googleAnalytics
+        ? '{{ template "_internal/google_analytics.html" . }}'
+        : ''
+    }
     <!-- CSS pipe -->
-    {{ $style := resources.Get "styles/main.css" | resources.Minify | resources.Fingerprint }}
+    {{ $style := resources.Get "styles/main.${stylesFormat}"${
+  stylesFormat !== 'css' ? '| resources.ToCSS' : ''
+} | resources.Minify | resources.Fingerprint }}
     <link rel="stylesheet" href="{{ $style.Permalink }}">
-    <!-- JavaScript pipe -->
-    {{ $built := resources.Get "js/index.js" | js.Build "bundle.js" }}
-    <script type="text/javascript" src="{{ $built.RelPermalink }}" defer></script>
     <title>{{ .Site.Title }}</title>
   </head>
   <body>
@@ -17,4 +21,4 @@ const baseOfFile = `<!doctype html>
   </body>
 </html>`
 
-module.exports = baseOfFile
+module.exports = createBaseOfFile
