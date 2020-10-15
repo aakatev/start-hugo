@@ -37,6 +37,12 @@ export default function Assets({ assets, setAssets }) {
     setAssets([...assets.filter(i => i !==item)])
   }
 
+  const hanldeUpdateAsset = (index) => (event) => {
+    let newAssets = [...assets]
+    newAssets[index] = event.target.value
+    setAssets(newAssets)
+  }
+
   return (
     <React.Fragment>
       <Title>Assets</Title>
@@ -49,7 +55,7 @@ export default function Assets({ assets, setAssets }) {
             <Input
               id="outlined-adornment-styles"
               value={url}
-              onChange={() => {}}
+              onChange={hanldeUpdateAsset(index)}
               endAdornment={
                 <InputAdornment position="end">
                   <IconButton onClick={() => hanldeRemoveAsset(url)}>
