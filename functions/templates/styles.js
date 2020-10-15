@@ -72,7 +72,7 @@ li.page-item a {
 }
 
 .content-post {
-	max-width: 500px;
+	max-width: 750px;
 	margin: auto;
 }
 
@@ -151,7 +151,7 @@ li.page-item
 
 
 .content-post 
-	max-width: 500px
+	max-width: 750px
 	margin: auto
 
 
