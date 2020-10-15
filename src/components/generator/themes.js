@@ -12,6 +12,7 @@ import InputAdornment from '@material-ui/core/InputAdornment'
 import Button from '@material-ui/core/Button'
 import Modal from '@material-ui/core/Modal'
 import Typography from '@material-ui/core/Typography'
+import Alert from '@material-ui/lab/Alert'
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -50,7 +51,7 @@ function getModalStyle() {
   }
 }
 
-export default function Assets({ assets, setAssets }) {
+export default function Themes({ assets, setAssets }) {
   const classes = useStyles()
 
   const hanldeRemoveAsset = (item) => {
@@ -76,11 +77,11 @@ export default function Assets({ assets, setAssets }) {
 
   const body = (
     <div style={modalStyle} className={classes.modalPaper}>
-      <Title>Add new asset</Title>
+      <Title>Add new theme</Title>
       <Grid xs={12} item>
         <FormControl fullWidth className={classes.margin} variant="outlined">
           <InputLabel htmlFor="outlined-adornment-name">
-            Link in a format https://example.com/style.css
+            In a format of https://github.com/budparr/gohugo-theme-ananke.git
           </InputLabel>
           <Input
             id="outlined-adornment-styles"
@@ -91,7 +92,7 @@ export default function Assets({ assets, setAssets }) {
       </Grid>{' '}
       <Grid xs={6} item>
         <Button onClick={handleOpen} color="primary">
-          Add CSS/JS
+          Add theme
         </Button>
       </Grid>
     </div>
@@ -99,38 +100,45 @@ export default function Assets({ assets, setAssets }) {
 
   return (
     <React.Fragment>
-      <Title>Assets ({assets.length})</Title>
-      {assets.length === 0
-        ? <Typography>No assets added</Typography>
-        : assets.map((url, index) => (
-            <Grid xs={12} key={url + index} item>
-              <FormControl
-                fullWidth
-                className={classes.margin}
-                variant="outlined"
-              >
-                <Input
-                  disabled
-                  id="outlined-adornment-styles"
-                  value={url}
-                  onChange={hanldeUpdateAsset(index)}
-                  endAdornment={
-                    <InputAdornment position="end">
-                      <IconButton onClick={() => hanldeRemoveAsset(url)}>
-                        <EditIcon />
-                      </IconButton>
-                      <IconButton onClick={() => hanldeRemoveAsset(url)}>
-                        <DeleteIcon />
-                      </IconButton>
-                    </InputAdornment>
-                  }
-                />
-              </FormControl>
-            </Grid>
-          ))}
+      <Title>Themes ({assets.length})</Title>
+      <Alert severity="warning">
+        Warning! This feature is experimental. The themes will not be added
+        directly to the generated project, but you will be provided with a shell
+        script to obtain them.
+      </Alert>
+      {assets.length === 0 ? (
+        <Typography>No themes added</Typography>
+      ) : (
+        assets.map((url, index) => (
+          <Grid xs={12} key={url + index} item>
+            <FormControl
+              fullWidth
+              className={classes.margin}
+              variant="outlined"
+            >
+              <Input
+                disabled
+                id="outlined-adornment-styles"
+                value={url}
+                onChange={hanldeUpdateAsset(index)}
+                endAdornment={
+                  <InputAdornment position="end">
+                    <IconButton onClick={() => hanldeRemoveAsset(url)}>
+                      <EditIcon />
+                    </IconButton>
+                    <IconButton onClick={() => hanldeRemoveAsset(url)}>
+                      <DeleteIcon />
+                    </IconButton>
+                  </InputAdornment>
+                }
+              />
+            </FormControl>
+          </Grid>
+        ))
+      )}
       <Grid xs={6} item>
         <Button onClick={handleOpen} color="primary">
-          Add CSS/JS
+          Add theme
         </Button>
       </Grid>
       <Modal

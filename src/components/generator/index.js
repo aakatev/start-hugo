@@ -8,7 +8,7 @@ import Button from '@material-ui/core/Button'
 
 import Configuration from './configuration'
 import Options from './options'
-import Assets from './assets'
+import Themes from './themes'
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -47,10 +47,9 @@ const Generator = () => {
   })
 
   const [assets, setAssets] = React.useState([
-    'https://example.com/styles1.css',
-    'https://example.com/styles2.css',
-    'https://example.com/script1.js',
-    'https://example.com/script2.js',
+    'https://github.com/budparr/gohugo-theme-ananke.git',
+    'https://github.com/themefisher/airspace-hugo.git',
+    'https://github.com/Shen-Yu/hugo-chart.git'
   ])
 
   const generateCode = () => {
@@ -96,7 +95,7 @@ const Generator = () => {
 
         <Grid item xs={12}>
           <Paper className={classes.paper}>
-            <Assets assets={assets} setAssets={setAssets} />
+            <Themes assets={assets} setAssets={setAssets} />
           </Paper>
         </Grid>
       </Grid>
