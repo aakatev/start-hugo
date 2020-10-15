@@ -19,7 +19,7 @@ exports.handler = async (event) => {
     zip.append(site.stylesFile, { name: `assets/styles/main.${json.options.stylesFormat}` })
     zip.append(site.archetypeFile, { name: 'archetypes/default.md' })
     
-    site.contentFiles.map((file, index) => zip.append(file, { name: `post-${index+1}.md` }))
+    site.contentFiles.map((file, index) => zip.append(file, { name: `content/posts/post-${index+1}.md` }))
     
     zip.append('', { name: 'data/.gitkeep' })
     zip.append('', { name: 'themes/.gitkeep' })
