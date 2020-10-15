@@ -16,6 +16,7 @@ const createBaseOfFile = ({ stylesFormat, googleAnalytics }) => `<!doctype html>
     <title>{{ .Site.Title }}</title>
   </head>
   <body>
+    {{ partial "navbar" . }}
     {{ block "main" . }}
     {{ end }}
   </body>

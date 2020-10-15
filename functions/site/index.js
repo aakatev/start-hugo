@@ -1,10 +1,13 @@
-const baseOfFile = require('../templates/base.js')
-const singleFile = require('../templates/single.js')
-const listFile = require('../templates/list.js')
 const archetypeFile = require('../templates/archetype.js')
+
 const createConfigFile = require('../templates/config.js')
 const createBaseOfFile = require('../templates/base.js')
 const createStylesFile = require('../templates/styles.js')
+const createIndexFile = require('../templates/index')
+const createNavbarFile = require('../templates/navbar')
+const createSingleFile = require('../templates/single.js')
+const createListFile = require('../templates/list.js')
+const createContentFile = require('../templates/content')
 
 const siteFactory = (attributes) => {
   let configArgs = {
@@ -21,13 +24,27 @@ const siteFactory = (attributes) => {
   }
 
   let stylesArgs = {
-    stylesFormat: attributes.options.stylesFormat
+    stylesFormat: attributes.options.stylesFormat,
+  }
+
+  let listArgs = {
+    paginate: attributes.configuration.pagination,
   }
 
   let configFile = createConfigFile(configArgs)
   let baseOfFile = createBaseOfFile(baseOfArgs)
   let stylesFile = createStylesFile(stylesArgs)
+  let indexFile = createIndexFile()
+  let navbarFile = createNavbarFile()
+  let singleFile = createSingleFile()
+  let listFile = createListFile(listArgs)
 
+  let contentFiles =
+    attributes.options.pregenerateMD === 'yes'
+      ? require('../data').loremMarkDown.map((element) =>
+          createContentFile(element.title, element.body)
+        )
+      : []
 
   return {
     configFile,
@@ -36,6 +53,9 @@ const siteFactory = (attributes) => {
     listFile,
     stylesFile,
     archetypeFile,
+    indexFile,
+    navbarFile,
+    contentFiles,
   }
 }
 

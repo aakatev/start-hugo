@@ -1,7 +1,7 @@
-const createPostFile = (title, body) => `---
+const createContentFile = (title, body) => `---
 title: '${title}'
 draft: false
 ---
 ${body}`
 
-module.exports = createPostFile
+module.exports = createContentFile

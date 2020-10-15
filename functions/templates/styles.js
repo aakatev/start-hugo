@@ -1,4 +1,4 @@
-const cssStylesFile = `@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+const cssStylesFile = `@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap");
 
 body {
 	margin: 0;
@@ -6,33 +6,53 @@ body {
 	font-size: 1.4rem;
 }
 
-ul {
-  list-style-type: none;
-  margin: 0;
+ul.navbar {
+	list-style-type: none;
+	margin: 0;
 	padding: 0;
 	padding-top: 5px;
 	padding-bottom: 5px;
-  overflow: hidden;
-  background-color: #0a1922;
-  position: fixed;
-  top: 0;
-  width: 100%;
+	overflow: hidden;
+	background-color: #0a1922;
+	position: fixed;
+	top: 0;
+	width: 100%;
 }
 
-li {
-  float: left;
+li.navbar-link {
+	float: left;
 }
 
-li a {
-  display: block;
-  color: #fff;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
+li.navbar-link a {
+	display: block;
+	color: #fff;
+	text-align: center;
+	padding: 14px 16px;
+	text-decoration: none;
 }
 
-li a:hover:not(.active) {
-  background-color: #111;
+li.navbar-link a:hover:not(.active) {
+	background-color: #111;
+}
+
+ul.pagination {
+	display: flex;
+	justify-content: center;
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+li.page-item {
+	float: left;
+}
+
+li.page-item a {
+	display: block;
+	text-align: center;
+	padding: 14px 16px;
+	text-decoration: none;
 }
 
 .layout {
@@ -52,7 +72,7 @@ li a:hover:not(.active) {
 }
 
 .content-post {
-	max-width:500px;
+	max-width: 500px;
 	margin: auto;
 }
 
@@ -60,13 +80,14 @@ li a:hover:not(.active) {
 	overflow: scroll;
 }`
 
-const sassStyelsFile = `
+const sassStyelsFile = `@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap')
+
 body
 	margin: 0
 	font-family: 'Roboto', sans-serif
 	font-size: 1.4rem
 
-ul	
+ul.navbar	
 	list-style-type: none
 	margin: 0
 	padding: 0
@@ -79,11 +100,11 @@ ul
 	width: 100%
 
 
-li 
+li.navbar-link
   float: left
 
 
-li 
+li.navbar-link
 	a 
 		display: block
 		color: #fff
@@ -94,6 +115,24 @@ li
 	a:hover:not(.active) 
 	  background-color: #111
 
+ul.pagination
+	display: flex
+	justify-content: center
+	list-style-type: none
+	margin: 0
+	padding: 0
+	overflow: hidden
+
+
+li.page-item
+  float: left
+
+li.page-item
+	a 
+		display: block
+		text-align: center
+		padding: 14px 16px
+		text-decoration: none
 
 .layout 
 	padding-top: 40px
@@ -112,7 +151,7 @@ li
 
 
 .content-post 
-	max-width:500px
+	max-width: 500px
 	margin: auto
 
 
