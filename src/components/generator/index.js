@@ -8,7 +8,7 @@ import Button from '@material-ui/core/Button'
 
 import Configuration from './configuration'
 import Options from './options'
-import Themes from './themes'
+import Files from './files'
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -119,7 +119,7 @@ const Generator = () => {
 
         <Grid item xs={12}>
           <Paper className={classes.paper}>
-            <Themes files={files} themes={themes} setThemes={setThemes} />
+            <Files files={files} />
           </Paper>
         </Grid>
       </Grid>

@@ -1,7 +1,6 @@
 import React from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import Input from '@material-ui/core/Input'
-import InputLabel from '@material-ui/core/InputLabel'
 import FormControl from '@material-ui/core/FormControl'
 import Title from '../title'
 import Grid from '@material-ui/core/Grid'
@@ -55,25 +54,10 @@ function getModalStyle() {
   }
 }
 
-export default function Themes({ themes, setThemes, files }) {
+export default function Files({ files }) {
   const classes = useStyles()
 
   console.log(files)
-
-  const handleRemoveTheme = (item) => {
-    setThemes([...themes.filter((i) => i !== item)])
-  }
-
-  const handleUpdateTheme = (index) => (event) => {
-    let newthemes = [...themes]
-    newthemes[index] = event.target.value
-    setThemes(newthemes)
-  }
-
-  const handleAddTheme = (theme) => {
-    let newthemes = [...themes, theme]
-    setThemes(newthemes)
-  }
 
   const [code, setCode] = React.useState(`function add(a, b) {
   return a + b;
@@ -82,63 +66,36 @@ export default function Themes({ themes, setThemes, files }) {
   const [modalStyle] = React.useState(getModalStyle)
   const [open, setOpen] = React.useState(false)
   const [text, setText] = React.useState('')
-  const [title, setTitle] = React.useState('')
-  const [button, setButton] = React.useState('')
   const [index, setIndex] = React.useState(null)
-  const [error, setError] = React.useState(false)
 
-  const handleOpen = (action, index = null) => {
-    if (action === 'add') {
-      setTitle('Add new theme')
-      setButton('Add theme')
-    } else if (action === 'edit') {
-      setTitle('Edit existing theme')
-      setButton('Edit theme')
-      setIndex(index)
-      setText(themes[index])
-    }
-    setError(false)
+  const handleOpen = (index) => {
+    setIndex(index)
+    setText(files[index].path)
     setOpen(true)
   }
 
   const handleClose = () => {
     setText('')
-    setError(false)
-    setTitle('')
-    setButton('')
     setIndex(null)
     setOpen(false)
   }
 
-  const handleSubmit = () => {
-    if (!/https:\/\/github.com\/.*git$/.test(text)) {
-      setError(true)
-      return
-    } else if (index !== null) {
-      let newthemes = [...themes]
-      newthemes[index] = text
-      setThemes(newthemes)
-    } else {
-      handleAddTheme(text)
-    }
-    handleClose()
-  }
-
   const body = (
     <div style={modalStyle} className={classes.modalPaper}>
-      <Title>File</Title>
+      <Title>File: {text}</Title>
       <Editor
         value={code}
         onValueChange={(c) => setCode(c)}
         highlight={(code) => highlight(code, languages.js)}
         padding={10}
+        readOnly
         style={{
           fontFamily: '"Fira code", "Fira Mono", monospace',
-          fontSize: 12,
+          fontSize: 14,
         }}
       />
       <Grid xs={6} item>
-        <Button onClick={() => handleSubmit()} color="primary">
+        <Button onClick={() => handleClose()} color="primary">
           Close
         </Button>
       </Grid>
@@ -165,10 +122,9 @@ export default function Themes({ themes, setThemes, files }) {
                 disabled
                 id="outlined-adornment-styles"
                 value={file.path}
-                //onChange={handleUpdateTheme(index)}
                 endAdornment={
                   <InputAdornment position="end">
-                    <IconButton onClick={() => handleOpen('edit', index)}>
+                    <IconButton onClick={() => handleOpen(index)}>
                       <DescriptionIcon />
                     </IconButton>
                   </InputAdornment>
