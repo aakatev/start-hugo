@@ -64,6 +64,8 @@ const Generator = () => {
     { path: 'config.toml',contentHandler: require('../../../shared/templates/index') },
   ])
 
+  React.useEffect(() => console.log(options.stylesFormat), [options.stylesFormat])
+
   const generateCode = () => {
     if (
       configuration.name === '' ||
