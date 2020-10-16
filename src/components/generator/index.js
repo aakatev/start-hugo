@@ -54,14 +54,14 @@ const Generator = () => {
 
 
   const [files, setFiles] = React.useState([
-    { path: 'archetypes/default.md',contentHandler: require('../../../functions/templates/archetype') },
-    { path: `assets/styles/main.${options.stylesFormat}`, contentHandler: require('../../../functions/templates/styles') },
-    { path: 'layouts/_default/baseof.html', contentHandler: require('../../../functions/templates/base') },
-    { path: 'layouts/_default/index.html', contentHandler: require('../../../functions/templates/index') },
-    { path: 'layouts/_default/list.html',contentHandler: require('../../../functions/templates/list') },
-    { path: 'layouts/_default/single.html',contentHandler: require('../../../functions/templates/single') },
-    { path: 'layouts/partials/navbar.html',contentHandler: require('../../../functions/templates/navbar') },
-    { path: 'config.toml',contentHandler: require('../../../functions/templates/index') },
+    { path: 'archetypes/default.md',contentHandler: require('../../../shared/templates/archetype') },
+    { path: `assets/styles/main.${options.stylesFormat}`, contentHandler: require('../../../shared/templates/styles') },
+    { path: 'layouts/_default/baseof.html', contentHandler: require('../../../shared/templates/base') },
+    { path: 'layouts/_default/index.html', contentHandler: require('../../../shared/templates/index') },
+    { path: 'layouts/_default/list.html',contentHandler: require('../../../shared/templates/list') },
+    { path: 'layouts/_default/single.html',contentHandler: require('../../../shared/templates/single') },
+    { path: 'layouts/partials/navbar.html',contentHandler: require('../../../shared/templates/navbar') },
+    { path: 'config.toml',contentHandler: require('../../../shared/templates/index') },
   ])
 
   const generateCode = () => {

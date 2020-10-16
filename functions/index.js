@@ -1,5 +1,5 @@
 const { formatResponse } = require('./response')
-const { siteFactory } = require('./site')
+const { siteFactory } = require('../shared/site')
 const Archiver = require('archiver')
 
 exports.handler = async (event) => {
