@@ -6,13 +6,17 @@ import FormControl from '@material-ui/core/FormControl'
 import Title from '../title'
 import Grid from '@material-ui/core/Grid'
 import IconButton from '@material-ui/core/IconButton'
-import DeleteIcon from '@material-ui/icons/Delete'
-import EditIcon from '@material-ui/icons/Edit'
+import DescriptionIcon from '@material-ui/icons/Description'
 import InputAdornment from '@material-ui/core/InputAdornment'
 import Button from '@material-ui/core/Button'
 import Modal from '@material-ui/core/Modal'
 import Typography from '@material-ui/core/Typography'
 import Alert from '@material-ui/lab/Alert'
+
+import Editor from 'react-simple-code-editor'
+import { highlight, languages } from 'prismjs/components/prism-core'
+import 'prismjs/components/prism-clike'
+import 'prismjs/components/prism-javascript'
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -51,8 +55,10 @@ function getModalStyle() {
   }
 }
 
-export default function Themes({ themes, setThemes }) {
+export default function Themes({ themes, setThemes, files }) {
   const classes = useStyles()
+
+  console.log(files)
 
   const handleRemoveTheme = (item) => {
     setThemes([...themes.filter((i) => i !== item)])
@@ -68,6 +74,10 @@ export default function Themes({ themes, setThemes }) {
     let newthemes = [...themes, theme]
     setThemes(newthemes)
   }
+
+  const [code, setCode] = React.useState(`function add(a, b) {
+  return a + b;
+}`)
 
   const [modalStyle] = React.useState(getModalStyle)
   const [open, setOpen] = React.useState(false)
@@ -116,27 +126,20 @@ export default function Themes({ themes, setThemes }) {
 
   const body = (
     <div style={modalStyle} className={classes.modalPaper}>
-      <Title>{title}</Title>
-      <Grid xs={12} item>
-        <FormControl
-          error={error}
-          fullWidth
-          className={classes.margin}
-          variant="outlined"
-        >
-          <InputLabel htmlFor="outlined-adornment-name">
-            {'In a format of https://github.com/<organization>/<repo>.git'}
-          </InputLabel>
-          <Input
-            id="outlined-adornment-styles"
-            value={text}
-            onChange={(event) => setText(event.target.value)}
-          />
-        </FormControl>
-      </Grid>{' '}
+      <Title>File</Title>
+      <Editor
+        value={code}
+        onValueChange={(c) => setCode(c)}
+        highlight={(code) => highlight(code, languages.js)}
+        padding={10}
+        style={{
+          fontFamily: '"Fira code", "Fira Mono", monospace',
+          fontSize: 12,
+        }}
+      />
       <Grid xs={6} item>
         <Button onClick={() => handleSubmit()} color="primary">
-          {button}
+          Close
         </Button>
       </Grid>
     </div>
@@ -144,17 +147,15 @@ export default function Themes({ themes, setThemes }) {
 
   return (
     <React.Fragment>
-      <Title>Themes ({themes.length})</Title>
+      <Title>Files ({files.length})</Title>
       <Alert severity="warning">
-        Warning! This feature is experimental. The themes will not be added
-        directly to the generated project, but you will be provided with a shell
-        script to obtain them.
+        Warning! Some files (like posts, and other content, or empty directories) will not be displayed here.
       </Alert>
-      {themes.length === 0 ? (
-        <Typography>No themes added</Typography>
+      {files.length === 0 ? (
+        <Typography>No files found</Typography>
       ) : (
-        themes.map((url, index) => (
-          <Grid xs={12} key={url + Date.now() * Math.random()} item>
+        files.map((file, index) => (
+          <Grid xs={12} key={file.path + Math.random()} item>
             <FormControl
               fullWidth
               className={classes.margin}
@@ -163,15 +164,12 @@ export default function Themes({ themes, setThemes }) {
               <Input
                 disabled
                 id="outlined-adornment-styles"
-                value={url}
-                onChange={handleUpdateTheme(index)}
+                value={file.path}
+                //onChange={handleUpdateTheme(index)}
                 endAdornment={
                   <InputAdornment position="end">
                     <IconButton onClick={() => handleOpen('edit', index)}>
-                      <EditIcon />
-                    </IconButton>
-                    <IconButton onClick={() => handleRemoveTheme(url)}>
-                      <DeleteIcon />
+                      <DescriptionIcon />
                     </IconButton>
                   </InputAdornment>
                 }
@@ -180,11 +178,6 @@ export default function Themes({ themes, setThemes }) {
           </Grid>
         ))
       )}
-      <Grid xs={6} item>
-        <Button onClick={() => handleOpen('add')} color="primary">
-          Add theme
-        </Button>
-      </Grid>
       <Modal
         open={open}
         onClose={handleClose}

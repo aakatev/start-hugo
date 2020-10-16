@@ -52,6 +52,18 @@ const Generator = () => {
     'https://github.com/Shen-Yu/hugo-chart.git',
   ])
 
+
+  const [files, setFile] = React.useState([
+    { path: 'archetypes/default.md',contentHandler: require('../../../functions/templates/archetype') },
+    { path: `assets/styles/main.${options.stylesFormat}`, contentHandler: require('../../../functions/templates/styles') },
+    { path: 'layouts/_default/baseof.html', contentHandler: require('../../../functions/templates/base') },
+    { path: 'layouts/_default/index.html', contentHandler: require('../../../functions/templates/index') },
+    { path: 'layouts/_default/list.html',contentHandler: require('../../../functions/templates/list') },
+    { path: 'layouts/_default/single.html',contentHandler: require('../../../functions/templates/single') },
+    { path: 'layouts/partials/navbar.html',contentHandler: require('../../../functions/templates/navbar') },
+    { path: 'config.toml',contentHandler: require('../../../functions/templates/index') },
+  ])
+
   const generateCode = () => {
     if (
       configuration.name === '' ||
@@ -107,7 +119,7 @@ const Generator = () => {
 
         <Grid item xs={12}>
           <Paper className={classes.paper}>
-            <Themes themes={themes} setThemes={setThemes} />
+            <Themes files={files} themes={themes} setThemes={setThemes} />
           </Paper>
         </Grid>
       </Grid>

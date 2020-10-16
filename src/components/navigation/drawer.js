@@ -80,10 +80,6 @@ const NavigationDrawer = ({ handleDrawerClose, open }) => {
           3. Unzip generated project, and start developing
         </Typography>
         <Typography variant="body1">Tip: To start Hugo development server run <code>hugo server</code></Typography>
-        <Typography className={classes.marginTop} variant="h5" component="h2" gutterBottom>
-          4. If you added Hugo themes, run the bootstrap script
-        </Typography>
-        <Typography variant="body1">Tip: This step is currently supported on Mac and Linux machines and requires <code>git</code> to be installed</Typography>
       </div>
     </Drawer>
   )

@@ -4,6 +4,8 @@ import App from './components/app'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles'
 
+import './main.css'
+
 const theme = createMuiTheme({
   palette: {
     primary: {

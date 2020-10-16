@@ -1,5 +1,3 @@
-const archetypeFile = require('../templates/archetype.js')
-
 const createConfigFile = require('../templates/config.js')
 const createBaseOfFile = require('../templates/base.js')
 const createStylesFile = require('../templates/styles.js')
@@ -8,6 +6,7 @@ const createNavbarFile = require('../templates/navbar')
 const createSingleFile = require('../templates/single.js')
 const createListFile = require('../templates/list.js')
 const createContentFile = require('../templates/content')
+const createArchetypeFile = require('../templates/archetype.js')
 
 const siteFactory = (attributes) => {
   let configArgs = {
@@ -38,6 +37,7 @@ const siteFactory = (attributes) => {
   let navbarFile = createNavbarFile()
   let singleFile = createSingleFile()
   let listFile = createListFile(listArgs)
+  let archetypeFile = createArchetypeFile()
 
   let contentFiles =
     attributes.options.pregenerateMD === 'yes'
