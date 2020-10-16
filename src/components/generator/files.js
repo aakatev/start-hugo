@@ -7,15 +7,9 @@ import Grid from '@material-ui/core/Grid'
 import IconButton from '@material-ui/core/IconButton'
 import DescriptionIcon from '@material-ui/icons/Description'
 import InputAdornment from '@material-ui/core/InputAdornment'
-import Button from '@material-ui/core/Button'
-import Modal from '@material-ui/core/Modal'
 import Typography from '@material-ui/core/Typography'
 import Alert from '@material-ui/lab/Alert'
 
-import Editor from 'react-simple-code-editor'
-import { highlight, languages } from 'prismjs/components/prism-core'
-import 'prismjs/components/prism-clike'
-import 'prismjs/components/prism-javascript'
 import FileModal from './modal'
 
 const useStyles = makeStyles((theme) => ({

@@ -53,7 +53,7 @@ const Generator = () => {
   ])
 
 
-  const [files, setFile] = React.useState([
+  const [files, setFiles] = React.useState([
     { path: 'archetypes/default.md',contentHandler: require('../../../functions/templates/archetype') },
     { path: `assets/styles/main.${options.stylesFormat}`, contentHandler: require('../../../functions/templates/styles') },
     { path: 'layouts/_default/baseof.html', contentHandler: require('../../../functions/templates/base') },
