@@ -16,6 +16,7 @@ import Editor from 'react-simple-code-editor'
 import { highlight, languages } from 'prismjs/components/prism-core'
 import 'prismjs/components/prism-clike'
 import 'prismjs/components/prism-javascript'
+import FileModal from './modal'
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -63,7 +64,6 @@ export default function Files({ files }) {
   return a + b;
 }`)
 
-  const [modalStyle] = React.useState(getModalStyle)
   const [open, setOpen] = React.useState(false)
   const [text, setText] = React.useState('')
   const [index, setIndex] = React.useState(null)
@@ -80,33 +80,12 @@ export default function Files({ files }) {
     setOpen(false)
   }
 
-  const body = (
-    <div style={modalStyle} className={classes.modalPaper}>
-      <Title>File: {text}</Title>
-      <Editor
-        value={code}
-        onValueChange={(c) => setCode(c)}
-        highlight={(code) => highlight(code, languages.js)}
-        padding={10}
-        readOnly
-        style={{
-          fontFamily: '"Fira code", "Fira Mono", monospace',
-          fontSize: 14,
-        }}
-      />
-      <Grid xs={6} item>
-        <Button onClick={() => handleClose()} color="primary">
-          Close
-        </Button>
-      </Grid>
-    </div>
-  )
-
   return (
     <React.Fragment>
       <Title>Files ({files.length})</Title>
       <Alert severity="warning">
-        Warning! Some files (like posts, and other content, or empty directories) will not be displayed here.
+        Warning! Some files (like posts, and other content, or empty
+        directories) will not be displayed here.
       </Alert>
       {files.length === 0 ? (
         <Typography>No files found</Typography>
@@ -134,14 +113,12 @@ export default function Files({ files }) {
           </Grid>
         ))
       )}
-      <Modal
+      <FileModal
         open={open}
-        onClose={handleClose}
-        aria-labelledby="simple-modal-title"
-        aria-describedby="simple-modal-description"
-      >
-        {body}
-      </Modal>
+        handleClose={handleClose}
+        text={text}
+        code={code}
+      />
     </React.Fragment>
   )
 }
