@@ -1,28 +1,16 @@
 import React from 'react'
-import { makeStyles } from '@material-ui/core/styles'
 
+import useStyles from './styles'
 import Navigation from './navigation'
 import Generator from './generator'
 
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    display: 'flex',
-  },
-  content: {
-    flexGrow: 1,
-    height: '100vh',
-    overflow: 'auto',
-  },
-  appBarSpacer: theme.mixins.toolbar,
-}))
-
 function App() {
   const classes = useStyles()
   return (
-    <div className={classes.root}>
+    <div className={classes.appRoot}>
       <Navigation />
-      <main className={classes.content}>
+      <main className={classes.appContent}>
         <div className={classes.appBarSpacer} />
         <Generator />
       </main>

@@ -5,48 +5,9 @@ import Drawer from '@material-ui/core/Drawer'
 import Divider from '@material-ui/core/Divider'
 import IconButton from '@material-ui/core/IconButton'
 import CloseIcon from '@material-ui/icons/Close'
-import { makeStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography';
 
-const drawerWidth = '100vw'
-
-const useStyles = makeStyles((theme) => ({
-  toolbarIcon: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'flex-end',
-    padding: '0 8px',
-    ...theme.mixins.toolbar,
-  },
-  drawerPaper: {
-    position: 'relative',
-    width: drawerWidth,
-    transition: theme.transitions.create('width', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-  },
-  main: {
-    marginTop: theme.spacing(6),
-    marginBottom: theme.spacing(2),
-    marginLeft: theme.spacing(4),
-    marginRight: theme.spacing(4)
-  },
-  drawerPaperClose: {
-    overflowX: 'hidden',
-    transition: theme.transitions.create('width', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-    width: theme.spacing(7),
-    [theme.breakpoints.up('sm')]: {
-      width: theme.spacing(9),
-    },
-  },
-  marginTop: {
-    marginTop: theme.spacing(3)
-  }
-}))
+import useStyles from '../styles'
 
 const NavigationDrawer = ({ handleDrawerClose, open }) => {
   const classes = useStyles()
@@ -64,7 +25,7 @@ const NavigationDrawer = ({ handleDrawerClose, open }) => {
         </IconButton>
       </div>
       <Divider />
-      <div className={classes.main}>
+      <div className={classes.drawerMain}>
         <Typography variant="h2" component="h1" gutterBottom>
           Usage instructions
         </Typography>
